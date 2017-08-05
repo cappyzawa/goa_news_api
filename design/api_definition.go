@@ -14,7 +14,7 @@ var _ = API("news api", func() {
 	Contact(func() {
 		Name("shu920921")
 		Email("m153304w@st.u-gakugei.ac.jp")
-		URL("https://github.com/shu920921/goa-news-api/issues")
+		URL("https://github.com/shu920921/goa_news_api/issues")
 	})
 	// ライセンス
 	License(func() {
