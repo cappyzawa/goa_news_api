@@ -27,16 +27,5 @@ var _ = API("news api", func() {
 	// エンドポイントのベースパス
 	BasePath("/api/v1")
 
-	// CORSポリシー
-	Origin("http://localhost:18080/swagger", func() {
-		//ヘッダー
-		Expose("X-Time")
-		//許可するHTTPメソッド
-		//現状GETしか使わないが。。。
-		Methods("GET", "POST", "PUT", "DELETE")
-		//キャッシュする時間
-		MaxAge(600)
-		// Access-Control-Allow-Credentialsヘッダーを設定する
-		Credentials()
-	})
+
 })

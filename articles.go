@@ -16,6 +16,7 @@ func NewArticlesController(service *goa.Service) *ArticlesController {
 }
 
 // Article runs the article action.
+// ここが /articles/:idの振る舞い
 func (c *ArticlesController) Article(ctx *app.ArticleArticlesContext) error {
 	// ArticlesController_Article: start_implement
 
@@ -27,6 +28,7 @@ func (c *ArticlesController) Article(ctx *app.ArticleArticlesContext) error {
 }
 
 // Articles runs the articles action.
+// ここが /articlesの振る舞い
 func (c *ArticlesController) Articles(ctx *app.ArticlesArticlesContext) error {
 	// ArticlesController_Articles: start_implement
 

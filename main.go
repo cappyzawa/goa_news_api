@@ -26,7 +26,7 @@ func main() {
 	app.MountSwaggerController(service, c2)
 
 	// Start service
-	if err := service.ListenAndServeTLS(":18080", "cert.pem", "key.pem"); err != nil {
+	if err := service.ListenAndServe(":18080"); err != nil {
 		service.LogError("startup", "err", err)
 	}
 
