@@ -13,9 +13,9 @@ var _ = Resource("articles", func() {
 	Action("articles", func() {
 		Description("記事の一覧")
 		Routing(
-			GET("/"),
+			GET(""),
 		)
-		Response(OK, ArticlesMedia)
+		Response(OK, CollectionOf(Article))
 		Response(BadRequest, ErrorMedia)
 	})
 
@@ -27,7 +27,7 @@ var _ = Resource("articles", func() {
 		Params(func() {
 			Param("id", Integer, "id")
 		})
-		Response(OK, ArticleMedia)
+		Response(OK, Article)
 		Response(NotFound)
 		Response(BadRequest, ErrorMedia)
 	})

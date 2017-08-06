@@ -37,16 +37,14 @@ func (mt *GoaNewsAPIArticle) Validate() (err error) {
 	return
 }
 
-// 記事一覧のデータ (default view)
+// GoaNewsApiArticleCollection is the media type for an array of GoaNewsApiArticle (default view)
 //
-// Identifier: application/vnd.goa.news.api.articles+json; view=default
-type GoaNewsAPIArticles struct {
-	Articles []*GoaNewsAPIArticle `form:"articles,omitempty" json:"articles,omitempty" xml:"articles,omitempty"`
-}
+// Identifier: application/vnd.goa.news.api.article+json; type=collection; view=default
+type GoaNewsAPIArticleCollection []*GoaNewsAPIArticle
 
-// Validate validates the GoaNewsAPIArticles media type instance.
-func (mt *GoaNewsAPIArticles) Validate() (err error) {
-	for _, e := range mt.Articles {
+// Validate validates the GoaNewsAPIArticleCollection media type instance.
+func (mt GoaNewsAPIArticleCollection) Validate() (err error) {
+	for _, e := range mt {
 		if e != nil {
 			if err2 := e.Validate(); err2 != nil {
 				err = goa.MergeErrors(err, err2)

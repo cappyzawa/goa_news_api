@@ -33,42 +33,19 @@ definitions:
     - clicks
     title: 'Mediatype identifier: application/vnd.goa.news.api.article+json; view=default'
     type: object
-  GoaNewsApiArticles:
-    description: 記事一覧のデータ (default view)
+  GoaNewsApiArticleCollection:
+    description: GoaNewsApiArticleCollection is the media type for an array of GoaNewsApiArticle
+      (default view)
     example:
-      articles:
-      - clicks: 3.317074e+18
-        description: Ratione odio magnam.
-        head_line: Qui est ipsam.
-        id: 7.1909056e+18
-      - clicks: 3.317074e+18
-        description: Ratione odio magnam.
-        head_line: Qui est ipsam.
-        id: 7.1909056e+18
-      - clicks: 3.317074e+18
-        description: Ratione odio magnam.
-        head_line: Qui est ipsam.
-        id: 7.1909056e+18
-    properties:
-      articles:
-        example:
-        - clicks: 3.317074e+18
-          description: Ratione odio magnam.
-          head_line: Qui est ipsam.
-          id: 7.1909056e+18
-        - clicks: 3.317074e+18
-          description: Ratione odio magnam.
-          head_line: Qui est ipsam.
-          id: 7.1909056e+18
-        - clicks: 3.317074e+18
-          description: Ratione odio magnam.
-          head_line: Qui est ipsam.
-          id: 7.1909056e+18
-        items:
-          $ref: '#/definitions/GoaNewsApiArticle'
-        type: array
-    title: 'Mediatype identifier: application/vnd.goa.news.api.articles+json; view=default'
-    type: object
+    - clicks: 3.317074e+18
+      description: Ratione odio magnam.
+      head_line: Qui est ipsam.
+      id: 7.1909056e+18
+    items:
+      $ref: '#/definitions/GoaNewsApiArticle'
+    title: 'Mediatype identifier: application/vnd.goa.news.api.article+json; type=collection;
+      view=default'
+    type: array
   error:
     description: Error response media type (default view)
     example:
@@ -118,18 +95,18 @@ info:
   title: news api sample
   version: ""
 paths:
-  /api/v1/articles/:
+  /api/v1/articles:
     get:
       description: 記事の一覧
       operationId: articles#articles
       produces:
       - application/vnd.goa.error
-      - application/vnd.goa.news.api.articles+json
+      - application/vnd.goa.news.api.article+json; type=collection
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/GoaNewsApiArticles'
+            $ref: '#/definitions/GoaNewsApiArticleCollection'
         "400":
           description: Bad Request
           schema:

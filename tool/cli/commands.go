@@ -70,7 +70,7 @@ func RegisterCommands(app *cobra.Command, c *client.Client) {
 	}
 	tmp2 := new(ArticlesArticlesCommand)
 	sub = &cobra.Command{
-		Use:   `articles ["/api/v1/articles/"]`,
+		Use:   `articles ["/api/v1/articles"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp2.Run(c, args) },
 	}
@@ -323,7 +323,7 @@ func (cmd *ArticlesArticlesCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = "/api/v1/articles/"
+		path = "/api/v1/articles"
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)

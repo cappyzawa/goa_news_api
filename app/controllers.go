@@ -43,8 +43,6 @@ type ArticlesController interface {
 func MountArticlesController(service *goa.Service, ctrl ArticlesController) {
 	initService(service)
 	var h goa.Handler
-	service.Mux.Handle("OPTIONS", "/api/v1/articles/:id", ctrl.MuxHandler("preflight", handleArticlesOrigin(cors.HandlePreflight()), nil))
-	service.Mux.Handle("OPTIONS", "/api/v1/articles/", ctrl.MuxHandler("preflight", handleArticlesOrigin(cors.HandlePreflight()), nil))
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		// Check if there was an error loading the request
@@ -58,7 +56,6 @@ func MountArticlesController(service *goa.Service, ctrl ArticlesController) {
 		}
 		return ctrl.Article(rctx)
 	}
-	h = handleArticlesOrigin(h)
 	service.Mux.Handle("GET", "/api/v1/articles/:id", ctrl.MuxHandler("article", h, nil))
 	service.LogInfo("mount", "ctrl", "Articles", "action", "Article", "route", "GET /api/v1/articles/:id")
 
@@ -74,36 +71,8 @@ func MountArticlesController(service *goa.Service, ctrl ArticlesController) {
 		}
 		return ctrl.Articles(rctx)
 	}
-	h = handleArticlesOrigin(h)
-	service.Mux.Handle("GET", "/api/v1/articles/", ctrl.MuxHandler("articles", h, nil))
-	service.LogInfo("mount", "ctrl", "Articles", "action", "Articles", "route", "GET /api/v1/articles/")
-}
-
-// handleArticlesOrigin applies the CORS response headers corresponding to the origin.
-func handleArticlesOrigin(h goa.Handler) goa.Handler {
-
-	return func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
-		origin := req.Header.Get("Origin")
-		if origin == "" {
-			// Not a CORS request
-			return h(ctx, rw, req)
-		}
-		if cors.MatchOrigin(origin, "http://localhost:18080/swagger") {
-			ctx = goa.WithLogContext(ctx, "origin", origin)
-			rw.Header().Set("Access-Control-Allow-Origin", origin)
-			rw.Header().Set("Vary", "Origin")
-			rw.Header().Set("Access-Control-Expose-Headers", "X-Time")
-			rw.Header().Set("Access-Control-Max-Age", "600")
-			rw.Header().Set("Access-Control-Allow-Credentials", "true")
-			if acrm := req.Header.Get("Access-Control-Request-Method"); acrm != "" {
-				// We are handling a preflight request
-				rw.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
-			}
-			return h(ctx, rw, req)
-		}
-
-		return h(ctx, rw, req)
-	}
+	service.Mux.Handle("GET", "/api/v1/articles", ctrl.MuxHandler("articles", h, nil))
+	service.LogInfo("mount", "ctrl", "Articles", "action", "Articles", "route", "GET /api/v1/articles")
 }
 
 // SwaggerController is the controller interface for the Swagger actions.
@@ -151,19 +120,6 @@ func handleSwaggerOrigin(h goa.Handler) goa.Handler {
 			if acrm := req.Header.Get("Access-Control-Request-Method"); acrm != "" {
 				// We are handling a preflight request
 				rw.Header().Set("Access-Control-Allow-Methods", "GET")
-			}
-			return h(ctx, rw, req)
-		}
-		if cors.MatchOrigin(origin, "http://localhost:18080/swagger") {
-			ctx = goa.WithLogContext(ctx, "origin", origin)
-			rw.Header().Set("Access-Control-Allow-Origin", origin)
-			rw.Header().Set("Vary", "Origin")
-			rw.Header().Set("Access-Control-Expose-Headers", "X-Time")
-			rw.Header().Set("Access-Control-Max-Age", "600")
-			rw.Header().Set("Access-Control-Allow-Credentials", "true")
-			if acrm := req.Header.Get("Access-Control-Request-Method"); acrm != "" {
-				// We are handling a preflight request
-				rw.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
 			}
 			return h(ctx, rw, req)
 		}

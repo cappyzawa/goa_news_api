@@ -6,7 +6,7 @@ import (
 )
 
 //レスポンスデータの定義
-var ArticleMedia = MediaType("application/vnd.goa.news.api.article+json", func() {
+var Article = MediaType("application/vnd.goa.news.api.article+json", func() {
 	Description("記事詳細のデータ")
 	Attributes(func() {
 		Attribute("id", Integer)
@@ -41,13 +41,5 @@ var ArticleMedia = MediaType("application/vnd.goa.news.api.article+json", func()
 		Attribute("head_line")
 		Attribute("description")
 		Attribute("clicks")
-	})
-})
-
-var ArticlesMedia = MediaType("application/vnd.goa.news.api.articles+json", func() {
-	Description("記事一覧のデータ")
-	Attribute("articles", ArrayOf(ArticleMedia))
-	View("default", func() {
-		Attribute("articles")
 	})
 })
