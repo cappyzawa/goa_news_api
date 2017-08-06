@@ -56,7 +56,7 @@ func (m *ArticleDB) OneGoaNewsAPIArticle(ctx context.Context, id int) (*app.GoaN
 	defer goa.MeasureSince([]string{"goa", "db", "goaNewsAPIArticle", "onegoaNewsAPIArticle"}, time.Now())
 
 	var native Article
-	err := m.Db.Scopes().Table(m.TableName()).Preload("Articles").Where("id = ?", id).Find(&native).Error
+	err := m.Db.Scopes().Table(m.TableName()).Where("id = ?", id).Find(&native).Error
 
 	if err != nil && err != gorm.ErrRecordNotFound {
 		goa.LogError(ctx, "error getting Article", "error", err.Error())

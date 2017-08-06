@@ -240,7 +240,7 @@ func ArticlesArticlesBadRequest(t goatest.TInterface, ctx context.Context, servi
 	// Setup request context
 	rw := httptest.NewRecorder()
 	u := &url.URL{
-		Path: fmt.Sprintf("/api/v1/articles/"),
+		Path: fmt.Sprintf("/api/v1/articles"),
 	}
 	req, err := http.NewRequest("GET", u.String(), nil)
 	if err != nil {
@@ -304,7 +304,7 @@ func ArticlesArticlesOK(t goatest.TInterface, ctx context.Context, service *goa.
 	// Setup request context
 	rw := httptest.NewRecorder()
 	u := &url.URL{
-		Path: fmt.Sprintf("/api/v1/articles/"),
+		Path: fmt.Sprintf("/api/v1/articles"),
 	}
 	req, err := http.NewRequest("GET", u.String(), nil)
 	if err != nil {

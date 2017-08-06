@@ -51,7 +51,7 @@ func (c *Client) NewArticleArticlesRequest(ctx context.Context, path string) (*h
 // ArticlesArticlesPath computes a request path to the articles action of articles.
 func ArticlesArticlesPath() string {
 
-	return fmt.Sprintf("/api/v1/articles/")
+	return fmt.Sprintf("/api/v1/articles")
 }
 
 // 記事の一覧

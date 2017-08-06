@@ -20,14 +20,10 @@ import (
 
 // articles テーブル
 type Article struct {
-	ID             int       `gorm:"primary_key"` // primary key
-	ArticleID      int       // has many Article
-	Articles       []Article // has many Articles
+	ID             int `gorm:"primary_key"` // primary key
 	CategoryID     string
 	Clicks         int
 	Created        string
-	CreatedAt      time.Time
-	DeletedAt      *time.Time
 	Description    string
 	HeadLine       string
 	MediaID        string
@@ -35,7 +31,6 @@ type Article struct {
 	QstyCategoryID string
 	ThumbURL       string
 	Updated        string
-	UpdatedAt      time.Time
 	VespaIndex     string
 }
 

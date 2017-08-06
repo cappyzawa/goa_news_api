@@ -13,7 +13,7 @@ var _ = Resource("articles", func() {
 	Action("articles", func() {
 		Description("記事の一覧")
 		Routing(
-			GET("/"),
+			GET(""),
 		)
 		Response(OK, CollectionOf(Article))
 		Response(BadRequest, ErrorMedia)

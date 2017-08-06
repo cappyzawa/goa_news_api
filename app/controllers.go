@@ -71,8 +71,8 @@ func MountArticlesController(service *goa.Service, ctrl ArticlesController) {
 		}
 		return ctrl.Articles(rctx)
 	}
-	service.Mux.Handle("GET", "/api/v1/articles/", ctrl.MuxHandler("articles", h, nil))
-	service.LogInfo("mount", "ctrl", "Articles", "action", "Articles", "route", "GET /api/v1/articles/")
+	service.Mux.Handle("GET", "/api/v1/articles", ctrl.MuxHandler("articles", h, nil))
+	service.LogInfo("mount", "ctrl", "Articles", "action", "Articles", "route", "GET /api/v1/articles")
 }
 
 // SwaggerController is the controller interface for the Swagger actions.

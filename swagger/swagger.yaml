@@ -95,7 +95,7 @@ info:
   title: news api sample
   version: ""
 paths:
-  /api/v1/articles/:
+  /api/v1/articles:
     get:
       description: 記事の一覧
       operationId: articles#articles

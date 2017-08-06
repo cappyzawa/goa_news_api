@@ -26,7 +26,6 @@ var _ = StorageGroup("news storage", func() {
 			Field("qsty_category_id", gorma.String)
 			Field("description", gorma.String)
 			Field("clicks", gorma.Integer)
-			HasMany("Articles","Article")
 		})
 	})
 })
