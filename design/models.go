@@ -9,7 +9,8 @@ var _ = StorageGroup("news storage", func() {
 	Description("news DBの操作")
 	Store("MySQL", gorma.MySQL, func() {
 		Model("Article", func() {
-			// MediaTypeで生成したArticleMediaにマッピング
+			// MediaTypeで生成したArticleにマッピング
+			RendersTo(Article)
 			Description("articles テーブル")
 			Field("id", gorma.Integer, func() {
 				PrimaryKey()
@@ -25,6 +26,7 @@ var _ = StorageGroup("news storage", func() {
 			Field("qsty_category_id", gorma.String)
 			Field("description", gorma.String)
 			Field("clicks", gorma.Integer)
+			HasMany("Articles","Article")
 		})
 	})
 })

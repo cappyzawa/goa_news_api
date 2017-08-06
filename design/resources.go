@@ -15,7 +15,7 @@ var _ = Resource("articles", func() {
 		Routing(
 			GET("/"),
 		)
-		Response(OK, Articles)
+		Response(OK, CollectionOf(Article))
 		Response(BadRequest, ErrorMedia)
 	})
 

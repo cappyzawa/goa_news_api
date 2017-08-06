@@ -84,8 +84,11 @@ func NewArticlesArticlesContext(ctx context.Context, r *http.Request, service *g
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *ArticlesArticlesContext) OK(r *GoaNewsAPIArticles) error {
-	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.goa.news.api.articles+json")
+func (ctx *ArticlesArticlesContext) OK(r GoaNewsAPIArticleCollection) error {
+	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.goa.news.api.article+json; type=collection")
+	if r == nil {
+		r = GoaNewsAPIArticleCollection{}
+	}
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 

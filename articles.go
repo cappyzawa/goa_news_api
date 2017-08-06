@@ -33,6 +33,6 @@ func (c *ArticlesController) Articles(ctx *app.ArticlesArticlesContext) error {
 	// Put your logic here
 
 	// ArticlesController_Articles: end_implement
-	res := &app.GoaNewsAPIArticles{}
+	res := app.GoaNewsAPIArticleCollection{}
 	return ctx.OK(res)
 }

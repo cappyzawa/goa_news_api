@@ -43,11 +43,3 @@ var Article = MediaType("application/vnd.goa.news.api.article+json", func() {
 		Attribute("clicks")
 	})
 })
-
-var Articles = MediaType("application/vnd.goa.news.api.articles+json", func() {
-	Description("記事一覧のデータ")
-	Attribute("articles", ArrayOf(Article))
-	View("default", func() {
-		Attribute("articles")
-	})
-})
